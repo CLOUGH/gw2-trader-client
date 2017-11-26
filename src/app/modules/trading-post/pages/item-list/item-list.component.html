@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="mb-3">
+    <button class="btn btn-sm btn-primary" ngbTooltip="Sync item prices" (click)="syncItemPrices()">
+      <i class="fa fa-refresh"></i>
+    </button>
+  </div>
+  <table class="table table-hover table-striped table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Buy</th>
+        <th>Sell</th>
+        <th>ROI</th>
+        <th>Profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr *ngIf="!items.length">
+        <td colspan="5" class="text-center">No item found</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
