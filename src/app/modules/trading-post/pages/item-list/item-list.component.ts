@@ -13,12 +13,12 @@ export class ItemListComponent implements OnInit {
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {
-    this.syncItemPrices();
+    this.items = [];
   }
 
   syncItemPrices() {
-    this.itemService.syncItemPrices().subscribe(items => {
-      this.items = items;
+    this.itemService.syncItemPrices().subscribe(data => {
+      console.log(data);
     });
   }
 }

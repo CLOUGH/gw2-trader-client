@@ -12,32 +12,43 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class ItemService {
-  private apiUrl = 'http://localhost:3000';
   private socket;
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: Http) { }
 
   syncItemPrices(): Observable<any> {
-    // const observable = new Observable(observer => {
-    //   this.socket = io(this.apiUrl);
+    const observable = new Observable(observer => {
+      this.socket = io(this.apiUrl);
 
-    //   this.socket.on('downloading item ids', (data) => {
-    //     console.log('reached', data);
-    //     observer.next(data);
-    //   });
+      this.excuteSync().subscribe(message => {
+        // console.log(message);
+      });
 
-    //   return () => {
-    //     this.socket.disconnect();
-    //   };
-    // });
+      this.socket.on('/items/sync', (data) => {
+        observer.next(data);
 
+        if (data.message === 'Done') {
+          this.socket.disconnect();
+        }
+
+      });
+
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+
+    return observable;
+  }
+
+  excuteSync() {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
     return this.http.post(`${this.apiUrl}/items/sync`, {}, options)
+      .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-
-    // return observable;
   }
 
 }
