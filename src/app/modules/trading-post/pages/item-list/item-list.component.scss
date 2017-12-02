@@ -1,0 +1,48 @@
+$junk: #AAA;
+$basic: #000;
+$fine: #62A4DA;
+$masterworks: #1a9306;
+$rare: #fcd00b;
+$exotic: #ffa405;
+$ascended: #fb3e8d;
+$legendary: #4C139D;
+.Fine {
+  color: $fine;
+}
+
+.Junk {
+  color: $junk;
+}
+
+.Basic {
+  color: $basic;
+}
+
+.Masterworks {
+  color: $masterworks;
+}
+
+.Rare {
+  color: $rare;
+}
+
+.Exotic {
+  color: $exotic;
+}
+
+.Ascended {
+  color: $ascended;
+}
+
+.Legendary {
+  color: $legendary;
+}
+
+.coin-column {
+  min-width: 150px;
+  text-align: right;
+}
+
+.container {
+  background: white;
+}

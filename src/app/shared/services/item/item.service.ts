@@ -1,51 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-
+import * as io from 'socket.io-client';
 import { Item } from '../../models/item';
 
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import * as io from 'socket.io-client';
 
 @Injectable()
 export class ItemService {
-  private socket;
   private apiUrl = 'http://localhost:3000';
+  private socket: SocketIOClient.Socket; // The client instance of socket.io
 
-  constructor(private http: Http) { }
-
-  getItems(query) {
-    return this.http.get(`${this.apiUrl}/items`, { params: query })
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  constructor(private http: Http) {
+    this.socket = io(this.apiUrl);
   }
 
-  syncItemPrices(): Observable<any> {
+  getSyncMessages(): Observable<any> {
     const observable = new Observable(observer => {
-      this.socket = io(this.apiUrl);
-
-      this.excuteSync().subscribe(message => {
-        // console.log(message);
-      });
-
       this.socket.on('/items/sync', (data) => {
         observer.next(data);
-
-        if (data.message === 'Done') {
-          this.socket.disconnect();
-        }
-
       });
 
       return () => {
         this.socket.disconnect();
       };
     });
-
     return observable;
+  }
+
+  getItems(query) {
+    return this.http.get(`${this.apiUrl}/items`, { params: query })
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   excuteSync() {

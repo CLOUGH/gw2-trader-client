@@ -1,38 +1,51 @@
 <div class="container">
   <div class="mb-3">
-    <button class="btn btn-sm btn-primary" ngbTooltip="Sync item prices" (click)="syncItemPrices()">
-      <i class="fa fa-refresh"></i>
+    <button class="btn btn-sm btn-primary mr-2" ngbTooltip="Sync item prices" (click)="syncItemPrices()" [disabled]="itemSync.running">
+      <i class="fa fa-refresh" [ngClass]="{'fa-spin': itemSync.running}"></i>
     </button>
+    <span *ngIf="itemSync.running" class="text-muted">
+      <small>Items are updating...</small>
+    </span>
   </div>
   <table class="table table-hover table-striped table-hover table-sm">
     <thead>
       <tr>
         <th>Item</th>
-        <th>Level</th>
-        <th>Buy</th>
-        <th>Sell</th>
-        <th>Supply</th>
-        <th>Demand</th>
-        <th>Profit</th>
-        <th>ROI</th>
+        <th class="text-center">Level</th>
+        <th class="coin-column">Buy</th>
+        <th class="coin-column">Sell</th>
+        <th class="text-center">Supply</th>
+        <th class="text-center">Demand</th>
+        <th class="coin-column">Profit</th>
+        <th class="text-center">ROI</th>
+        <th class="text-center">BUC</th>
+        <th class="text-center">SUC</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of items">
         <td>
           <img [src]="item.icon" alt="" width="20">
-          <span>{{ item.name }}</span>
+          <span [class]="item.rarity">{{ item.name }}</span>
         </td>
-        <td>{{ item.level }}</td>
-        <td>{{ item.buy }}</td>
-        <td>{{ item.sell }}</td>
-        <td>{{ item.supply }}</td>
-        <td>{{ item.demand }}</td>
-        <td>{{ item.profit | number:'1.0-0' }}</td>
-        <td>{{ item.roi | number:'1.2-2' }}%</td>
+        <td class="text-center">{{ item.level }}</td>
+        <td class="coin-column">
+          <app-coin [coins]="item.buy"></app-coin>
+        </td>
+        <td class="coin-column">
+          <app-coin [coins]="item.sell"></app-coin>
+        </td>
+        <td class="text-center">{{ item.supply }}</td>
+        <td class="text-center">{{ item.demand }}</td>
+        <td class="coin-column">
+          <app-coin [coins]="item.profit"></app-coin>
+        </td>
+        <td class="text-center">{{ item.roi | number:'1.2-2' }}%</td>
+        <td class="text-center">{{ item.buc }}</td>
+        <td class="text-center">{{ item.suc }}</td>
       </tr>
       <tr *ngIf="!items.length">
-        <td colspan="7" class="text-center">No item found</td>
+        <td colspan="10" class="text-center">No item found</td>
       </tr>
     </tbody>
   </table>

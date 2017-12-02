@@ -13,8 +13,7 @@ import { CoinComponent } from './shared/components/coin/coin.component';
   declarations: [
     AppComponent,
     MainNavbarComponent,
-    FooterComponent,
-    CoinComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
