@@ -17,6 +17,12 @@ export class ItemService {
 
   constructor(private http: Http) { }
 
+  getItems(query) {
+    return this.http.get(`${this.apiUrl}/items`, { params: query })
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
   syncItemPrices(): Observable<any> {
     const observable = new Observable(observer => {
       this.socket = io(this.apiUrl);

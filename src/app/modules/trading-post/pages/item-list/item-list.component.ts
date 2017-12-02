@@ -13,7 +13,9 @@ export class ItemListComponent implements OnInit {
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {
-    this.items = [];
+    this.itemService.getItems({ limit: 500 }).subscribe(items => {
+      this.items = items;
+    });
   }
 
   syncItemPrices() {
