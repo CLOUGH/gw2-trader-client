@@ -7,6 +7,11 @@
       <small>Items are updating...</small>
     </span>
   </div>
+
+  <div class="mb-3">
+    <app-filter [filter]="filter" (filterChange)="onFilterUpdated($event)"></app-filter>
+  </div>
+
   <table class="table table-hover table-striped table-hover table-sm">
     <thead>
       <tr>

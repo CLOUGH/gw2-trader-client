@@ -11,6 +11,9 @@ import { ToasterService } from 'angular2-toaster';
 export class ItemListComponent implements OnInit {
   public items: Array<Item> = [];
   public itemSync;
+  public filter = {
+    limit: 20
+  };
 
   constructor(private itemService: ItemService) { }
 
@@ -37,8 +40,14 @@ export class ItemListComponent implements OnInit {
   }
 
   getItems() {
-    this.itemService.getItems({ limit: 100 }).subscribe(items => {
+    this.filter.limit = 20;
+    this.itemService.getItems(this.filter).subscribe(items => {
       this.items = items;
     });
+  }
+
+  onFilterUpdated(event) {
+    this.filter = event;
+    this.getItems();
   }
 }
