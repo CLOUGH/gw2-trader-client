@@ -3,173 +3,179 @@
     <label for="name" class="col-form-label col-form-label-sm">Name</label>
     <input class="form-control form-control-sm" formControlName="name" placeholder="Item name">
   </div>
-  <div class="row">
-    <div class="col-md-3">
-      <div class="form-group">
-        <label for="type" class="col-form-label col-form-label-sm">Type</label>
-        <select class="form-control form-control-sm" formControlName="type">
-          <option *ngFor="let type of itemTypes" [ngValue]="type">{{type}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="rarity" class="col-form-label col-form-label-sm">Rarity</label>
-        <select class="form-control form-control-sm" formControlName="rarity">
-          <option *ngFor="let rarity of itemRarities" [ngValue]="rarity">{{rarity}}</option>
-        </select>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minLevel" class="col-form-label col-form-label-sm">Min Level</label>
-            <input class="form-control form-control-sm" formControlName="minLevel" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxLevel" class="col-form-label col-form-label-sm">Max Level</label>
-            <input class="form-control form-control-sm" formControlName="maxLevel" placeholder="max">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <!-- buy -->
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minBuy" class="col-form-label col-form-label-sm">Min Buy</label>
-            <input class="form-control form-control-sm" formControlName="minBuy" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxBuy" class="col-form-label col-form-label-sm">Max Buy</label>
-            <input class="form-control form-control-sm" formControlName="maxBuy" placeholder="max">
-          </div>
-        </div>
-      </div>
-
-      <!-- Sell -->
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minSell" class="col-form-label col-form-label-sm">Min Sell</label>
-            <input class="form-control form-control-sm" formControlName="minSell" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxSell" class="col-form-label col-form-label-sm">Max Sell</label>
-            <input class="form-control form-control-sm" formControlName="maxSell" placeholder="max">
-          </div>
-        </div>
-      </div>
-
-      <!-- Profit -->
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minProfit" class="col-form-label col-form-label-sm">Min Profit</label>
-            <input class="form-control form-control-sm" formControlName="minProfit" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxProfit" class="col-form-label col-form-label-sm">Max Profit</label>
-            <input class="form-control form-control-sm" formControlName="maxProfit" placeholder="max">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-
-      <!-- Demand -->
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minDemand" class="col-form-label col-form-label-sm">Min Demand</label>
-            <input class="form-control form-control-sm" formControlName="minDemand" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxDemand" class="col-form-label col-form-label-sm">Max Demand</label>
-            <input class="form-control form-control-sm" formControlName="maxDemand" placeholder="max">
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minSupply" class="col-form-label col-form-label-sm">Min Supply</label>
-            <input class="form-control form-control-sm" formControlName="minSupply" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxSupply" class="col-form-label col-form-label-sm">Max Supply</label>
-            <input class="form-control form-control-sm" formControlName="maxSupply" placeholder="max">
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minROI" class="col-form-label col-form-label-sm">Min ROI</label>
-            <input class="form-control form-control-sm" formControlName="minROI" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxROI" class="col-form-label col-form-label-sm">Max ROI</label>
-            <input class="form-control form-control-sm" formControlName="maxROI" placeholder="max">
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-md-3">
-
-      <!-- BUC -->
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minBUC" class="col-form-label col-form-label-sm">Min BUC</label>
-            <input class="form-control form-control-sm" formControlName="minBUC" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxBUC" class="col-form-label col-form-label-sm">Max BUC</label>
-            <input class="form-control form-control-sm" formControlName="maxBUC" placeholder="max">
-          </div>
-        </div>
-      </div>
-
-      <!-- SUC -->
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="minSUC" class="col-form-label col-form-label-sm">Min SUC</label>
-            <input class="form-control form-control-sm" formControlName="minSUC" placeholder="min">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="maxSUC" class="col-form-label col-form-label-sm">Max SUC</label>
-            <input class="form-control form-control-sm" formControlName="maxSUC" placeholder="max">
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
   <div class="text-right">
-    <button class=" btn btn-primary btn-sm">Save Filter</button>
+    <button class="btn btn-link" (click)="advanceFilterCollapsed = !advanceFilterCollapsed" [attr.aria-expanded]="!advanceFilterCollapsed"
+      aria-controls="collapseExample">Advance</button>
+  </div>
+  <div id="collapseExample" [ngbCollapse]="advanceFilterCollapsed">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="type" class="col-form-label col-form-label-sm">Type</label>
+          <select class="form-control form-control-sm" formControlName="type">
+            <option *ngFor="let type of itemTypes" [ngValue]="type">{{type}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rarity" class="col-form-label col-form-label-sm">Rarity</label>
+          <select class="form-control form-control-sm" formControlName="rarity">
+            <option *ngFor="let rarity of itemRarities" [ngValue]="rarity">{{rarity}}</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minLevel" class="col-form-label col-form-label-sm">Min Level</label>
+              <input class="form-control form-control-sm" formControlName="minLevel" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxLevel" class="col-form-label col-form-label-sm">Max Level</label>
+              <input class="form-control form-control-sm" formControlName="maxLevel" placeholder="max">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <!-- buy -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minBuy" class="col-form-label col-form-label-sm">Min Buy</label>
+              <input class="form-control form-control-sm" formControlName="minBuy" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxBuy" class="col-form-label col-form-label-sm">Max Buy</label>
+              <input class="form-control form-control-sm" formControlName="maxBuy" placeholder="max">
+            </div>
+          </div>
+        </div>
+
+        <!-- Sell -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minSell" class="col-form-label col-form-label-sm">Min Sell</label>
+              <input class="form-control form-control-sm" formControlName="minSell" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxSell" class="col-form-label col-form-label-sm">Max Sell</label>
+              <input class="form-control form-control-sm" formControlName="maxSell" placeholder="max">
+            </div>
+          </div>
+        </div>
+
+        <!-- Profit -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minProfit" class="col-form-label col-form-label-sm">Min Profit</label>
+              <input class="form-control form-control-sm" formControlName="minProfit" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxProfit" class="col-form-label col-form-label-sm">Max Profit</label>
+              <input class="form-control form-control-sm" formControlName="maxProfit" placeholder="max">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+
+        <!-- Demand -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minDemand" class="col-form-label col-form-label-sm">Min Demand</label>
+              <input class="form-control form-control-sm" formControlName="minDemand" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxDemand" class="col-form-label col-form-label-sm">Max Demand</label>
+              <input class="form-control form-control-sm" formControlName="maxDemand" placeholder="max">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minSupply" class="col-form-label col-form-label-sm">Min Supply</label>
+              <input class="form-control form-control-sm" formControlName="minSupply" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxSupply" class="col-form-label col-form-label-sm">Max Supply</label>
+              <input class="form-control form-control-sm" formControlName="maxSupply" placeholder="max">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minROI" class="col-form-label col-form-label-sm">Min ROI</label>
+              <input class="form-control form-control-sm" formControlName="minROI" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxROI" class="col-form-label col-form-label-sm">Max ROI</label>
+              <input class="form-control form-control-sm" formControlName="maxROI" placeholder="max">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+
+        <!-- BUC -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minBUC" class="col-form-label col-form-label-sm">Min BUC</label>
+              <input class="form-control form-control-sm" formControlName="minBUC" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxBUC" class="col-form-label col-form-label-sm">Max BUC</label>
+              <input class="form-control form-control-sm" formControlName="maxBUC" placeholder="max">
+            </div>
+          </div>
+        </div>
+
+        <!-- SUC -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="minSUC" class="col-form-label col-form-label-sm">Min SUC</label>
+              <input class="form-control form-control-sm" formControlName="minSUC" placeholder="min">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="maxSUC" class="col-form-label col-form-label-sm">Max SUC</label>
+              <input class="form-control form-control-sm" formControlName="maxSUC" placeholder="max">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="text-right">
+      <button class=" btn btn-primary btn-sm">Save Filter</button>
+    </div>
   </div>
 </form>

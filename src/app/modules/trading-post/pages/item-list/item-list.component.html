@@ -25,10 +25,11 @@
         <th class="text-center">ROI</th>
         <th class="text-center">BUC</th>
         <th class="text-center">SUC</th>
+        <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of items">
+      <tr *ngFor="let item of items" [routerLink]="[item._id]">
         <td>
           <img [src]="item.icon" alt="" width="20">
           <span [class]="item.rarity">{{ item.name }}</span>
@@ -48,6 +49,8 @@
         <td class="text-center">{{ item.roi | number:'1.2-2' }}%</td>
         <td class="text-center">{{ item.buc }}</td>
         <td class="text-center">{{ item.suc }}</td>
+        <td class="text-center">
+        </td>
       </tr>
       <tr *ngIf="!items.length">
         <td colspan="10" class="text-center">No item found</td>
