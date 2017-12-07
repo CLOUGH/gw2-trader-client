@@ -12,6 +12,7 @@ import { ItemListComponent } from './pages/item-list/item-list.component';
 import { ItemService } from '../../shared/services/item/item.service';
 import { CoinComponent } from '../../shared/components/coin/coin.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { ItemResolverService } from './item-resolver.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { FilterComponent } from './components/filter/filter.component';
     FormsModule,
 
   ],
-  providers: [ItemService],
+  providers: [ItemService, ItemResolverService],
   declarations: [ItemComponent, ItemDetailComponent, ItemListComponent, CoinComponent, FilterComponent]
 })
 export class TradingPostModule { }

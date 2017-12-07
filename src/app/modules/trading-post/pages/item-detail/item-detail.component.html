@@ -1,3 +1,49 @@
-<p>
-  item-detail works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <img [src]="item.icon" alt="">
+    </div>
+    <div class="col-md-10">
+      <h1>{{item.name}}</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <dl>
+            <dt>Level</dt>
+            <dd>{{item.level}}</dd>
+
+            <dt>Rarity</dt>
+            <dd>{{item.rarity}}</dd>
+
+            <dt>Buy</dt>
+            <dd>
+              <app-coin [coins]="item.buy"></app-coin>
+            </dd>
+
+            <dt>Sell</dt>
+            <dd>
+              <app-coin [coins]="item.sell"></app-coin>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6">
+          <dl>
+            <dt>Profit</dt>
+            <dd>
+              <app-coin [coins]="item.profit"></app-coin>
+            </dd>
+
+            <dt>ROI</dt>
+            <dd>{{item.roi| number:'1.2-2'}}%</dd>
+
+            <dt>BUC</dt>
+            <dd>{{item.buc}}</dd>
+
+            <dt>SUC</dt>
+            <dd>{{item.suc}}</dd>
+
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

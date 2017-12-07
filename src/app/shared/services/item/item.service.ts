@@ -36,6 +36,11 @@ export class ItemService {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+  getItem(id) {
+    return this.http.get(`${this.apiUrl}/items/${id}`)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
   excuteSync() {
     const headers = new Headers({ 'Content-Type': 'application/json' });

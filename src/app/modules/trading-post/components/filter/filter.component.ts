@@ -31,6 +31,7 @@ export class FilterComponent implements OnInit {
 
   @Input() public filter;
   @Output() filterChange = new EventEmitter<any>();
+  public advanceFilterCollapsed = true;
 
 
   constructor(private formBuilder: FormBuilder) { }
