@@ -16,39 +16,51 @@
       <h1 [class]="item.rarity">{{item.name}}</h1>
       <div class="row">
         <div class="col-6 ">
-          <dl>
-            <dt>Level</dt>
-            <dd>{{item.level}}</dd>
+          <dl class="row">
+            <dt class="col-4">Level</dt>
+            <dd class="col-8">{{item.level}}</dd>
 
-            <dt>Rarity</dt>
-            <dd>{{item.rarity}}</dd>
+            <dt class="col-4">Rarity</dt>
+            <dd class="col-8">{{item.rarity}}</dd>
 
-            <dt>Buy</dt>
-            <dd>
+            <dt class="col-4">Buy</dt>
+            <dd class="col-8">
               <app-coin [coins]="item.buy"></app-coin>
             </dd>
 
-            <dt>Sell</dt>
-            <dd>
+            <dt class="col-4">Sell</dt>
+            <dd class="col-8">
               <app-coin [coins]="item.sell"></app-coin>
             </dd>
+
+            <dt class="col-4">Demand</dt>
+            <dd class="col-8">
+              {{item.demand}}
+            </dd>
+
+
           </dl>
         </div>
         <div class="col-6">
-          <dl>
-            <dt>Profit</dt>
-            <dd>
+          <dl class="row">
+            <dt class="col-4">Profit</dt>
+            <dd class="col-8">
               <app-coin [coins]="item.profit"></app-coin>
             </dd>
 
-            <dt>ROI</dt>
-            <dd>{{item.roi| number:'1.2-2'}}%</dd>
+            <dt class="col-4">ROI</dt>
+            <dd class="col-8">{{item.roi| number:'1.2-2'}}%</dd>
 
-            <dt>BUC</dt>
-            <dd>{{item.buc}}</dd>
+            <dt class="col-4">BUC</dt>
+            <dd class="col-8">{{item.buc}}</dd>
 
-            <dt>SUC</dt>
-            <dd>{{item.suc}}</dd>
+            <dt class="col-4">SUC</dt>
+            <dd class="col-8">{{item.suc}}</dd>
+
+            <dt class="col-4">Supply</dt>
+            <dd class="col-8">
+              {{item.supply}}
+            </dd>
           </dl>
         </div>
       </div>
@@ -65,7 +77,12 @@
     </ngb-tab>
     <ngb-tab title="Current Listing" id="listingsTab">
       <ng-template ngbTabContent>
+        <div class="form-group mt-3">
+          <label for="listingQuantity">Quantity</label>
+          <input type="number" name="listingQuantity" [(ngModel)]="listingQuantity" class="form-control">
+        </div>
         <div class="row pt-3">
+
           <div class="col-md-6">
             <div class="row">
               <div class="col-6">
@@ -94,12 +111,12 @@
                 <tr *ngFor="let buy of item.listings.buys | slice:startRange(buyPage, paginationSize): endRange(buyPage, paginationSize); let i=index"
                   [ngClass]="{'active-price': buy.unit_price==activeBuyPrice}" (click)="setActiveBuyPrice(buy.unit_price)">
                   <td>
-                    <app-coin [coins]="buy.unit_price"></app-coin>
+                    <app-coin [coins]="buy.unit_price*listingQuantity"></app-coin>
                   </td>
                   <td class="text-center">{{buy.listings}}</td>
                   <td class="text-center">{{buy.quantity}}</td>
                   <td class="text-center">
-                    <app-coin [coins]="calculateProfit(buy.unit_price,activeSellPrice)"></app-coin>
+                    <app-coin [coins]="listingQuantity * calculateProfit(buy.unit_price,activeSellPrice)"></app-coin>
                   </td>
                   <td class="text-center">{{calculateROI(buy.unit_price,activeSellPrice) | number:'1.2-2'}}%</td>
                 </tr>
@@ -137,12 +154,12 @@
                 <tr *ngFor="let sell of item.listings.sells | slice:startRange(sellPage, paginationSize): endRange(sellPage, paginationSize); let i=index"
                   [ngClass]="{'active-sell-price': sell.unit_price==activeSellPrice}" (click)="setActiveSellPrice(sell.unit_price)">
                   <td>
-                    <app-coin [coins]="sell.unit_price"></app-coin>
+                    <app-coin [coins]="sell.unit_price * listingQuantity"></app-coin>
                   </td>
                   <td class="text-center">{{sell.listings}}</td>
                   <td class="text-center">{{sell.quantity}}</td>
                   <td class="text-center">
-                    <app-coin [coins]="calculateProfit(activeBuyPrice,sell.unit_price)"></app-coin>
+                    <app-coin [coins]="this.listingQuantity * calculateProfit(activeBuyPrice,sell.unit_price)"></app-coin>
                   </td>
                   <td class="text-center">{{calculateROI(activeBuyPrice,sell.unit_price) | number:'1.2-2'}}%</td>
                 </tr>

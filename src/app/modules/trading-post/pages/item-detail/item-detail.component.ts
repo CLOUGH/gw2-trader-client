@@ -16,6 +16,7 @@ export class ItemDetailComponent implements OnInit {
   public activeBuyPrice: number;
   public buyAtProfit: number;
   public sellAtProfit: number;
+  public listingQuantity: number;
 
   constructor(private itemService: ItemService, private activatedRoute: ActivatedRoute) { }
 
@@ -27,6 +28,7 @@ export class ItemDetailComponent implements OnInit {
     this.paginationSize = 20;
     this.activeSellPrice = this.item.sell;
     this.activeBuyPrice = this.item.buy;
+    this.listingQuantity = 1;
   }
 
   startRange(page, paginationSize) {
