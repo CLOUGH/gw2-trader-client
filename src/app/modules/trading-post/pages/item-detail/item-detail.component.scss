@@ -38,15 +38,14 @@ $legendary: #4C139D;
   color: $legendary;
 }
 
-.coin-column {
-  min-width: 150px;
-  text-align: right;
+.item-icon {
+  width: 100%;
 }
 
-.container {
-  background: white;
+.active-price {
+  border-left: 5px solid red;
 }
 
-.item-name-column {
-  min-width: 200px;
+.active-sell-price {
+  border-left: 5px solid rgb(35, 179, 35);
 }

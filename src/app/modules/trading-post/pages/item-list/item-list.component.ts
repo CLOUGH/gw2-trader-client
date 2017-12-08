@@ -14,8 +14,14 @@ export class ItemListComponent implements OnInit {
   public filter = {
     limit: 20
   };
+  public itemUpdate;
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService) {
+    this.itemUpdate = {
+      updated: 0,
+      totalItems: 0
+    };
+  }
 
   ngOnInit() {
     this.itemSync = {
@@ -24,6 +30,11 @@ export class ItemListComponent implements OnInit {
 
     this.itemService.getSyncMessages().subscribe(data => {
       this.itemSync = data;
+      if (this.itemSync.updated) {
+        this.itemUpdate.updated = this.itemSync.updated;
+        this.itemUpdate.totalItems = this.itemSync.totalItems;
+      }
+
       if (this.itemSync.running === false) {
         // this.toasterService.pop('success', 'Done updating items');
         this.getItems();
@@ -34,6 +45,11 @@ export class ItemListComponent implements OnInit {
   }
 
   syncItemPrices() {
+    this.itemUpdate = {
+      updated: 0,
+      totalItems: 0
+    };
+    this.itemSync.running = true;
     this.itemService.excuteSync().subscribe(data => {
       console.log(data);
     });

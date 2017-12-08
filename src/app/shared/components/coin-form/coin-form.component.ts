@@ -1,29 +1,29 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-coin',
-  templateUrl: './coin.component.html',
-  styleUrls: ['./coin.component.scss']
+  selector: 'app-coin-form',
+  templateUrl: './coin-form.component.html',
+  styleUrls: ['./coin-form.component.scss']
 })
-export class CoinComponent implements OnInit {
-
+export class CoinFormComponent implements OnInit {
   public copper: Number = 0;
   public silver: Number = 0;
   public gold: Number = 0;
   public isNegative: Boolean = false;
 
   @Input()
-  set coins(coins: Number) {
+  set coins(coins) {
     this.copper = this.getCopper(coins);
     this.silver = this.getSilver(coins);
     this.gold = this.getGold(coins);
     this.isNegative = coins < 0;
   }
+  @Output() coinsChange = new EventEmitter<Number>();
+
 
   constructor() { }
 
   ngOnInit() {
-
   }
 
   getCopper(coins) {

@@ -51,4 +51,11 @@ export class ItemService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  calculateProfit(buy, sell) {
+    return (sell - (sell * 0.15)) - buy;
+  }
+  calculateROI(buy, sell) {
+    return sell > 0 ? this.calculateProfit(buy, sell) / buy * 100 : 0;
+  }
+
 }

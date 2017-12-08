@@ -7,13 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainNavbarComponent } from './shared/components/main-navbar/main-navbar.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { CoinComponent } from './shared/components/coin/coin.component';
+import { CoinFormComponent } from './shared/components/coin-form/coin-form.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavbarComponent,
-    FooterComponent
+    FooterComponent,
+    CoinFormComponent
   ],
   imports: [
     BrowserModule,
