@@ -17,11 +17,11 @@ export class ItemDetailComponent implements OnInit {
   public buyAtProfit: number;
   public sellAtProfit: number;
   public listingQuantity: number;
+  public tradingHistory: Array<any> = [];
 
   constructor(private itemService: ItemService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot.data);
     this.item = this.activatedRoute.snapshot.data['item'];
     this.sellPage = 0;
     this.buyPage = 0;
@@ -29,6 +29,10 @@ export class ItemDetailComponent implements OnInit {
     this.activeSellPrice = this.item.sell;
     this.activeBuyPrice = this.item.buy;
     this.listingQuantity = 1;
+
+    this.itemService.getTradingHistory(this.item.id).subscribe(tradingHistory => {
+      this.tradingHistory = tradingHistory;
+    });
   }
 
   startRange(page, paginationSize) {

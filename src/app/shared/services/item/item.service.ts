@@ -12,6 +12,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class ItemService {
   private apiUrl = 'http://localhost:3000';
+  private gw2Shinies = 'https://www.gw2shinies.com/api/json/';
   private socket: SocketIOClient.Socket; // The client instance of socket.io
 
   constructor(private http: Http) {
@@ -47,6 +48,12 @@ export class ItemService {
     const options = new RequestOptions({ headers: headers });
 
     return this.http.post(`${this.apiUrl}/items/sync`, {}, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getTradingHistory(itemId) {
+    return this.http.get(`${this.gw2Shinies}/history/${itemId}`)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
