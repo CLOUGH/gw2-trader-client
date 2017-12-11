@@ -28,6 +28,14 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     FormsModule,
   ],
   providers: [ItemService, ItemResolverService, D3Service],
-  declarations: [ItemComponent, ItemDetailComponent, ItemListComponent, CoinComponent, FilterComponent, D3graphComponent, LineChartComponent]
+  declarations: [
+    ItemComponent,
+    ItemDetailComponent,
+    ItemListComponent,
+    CoinComponent,
+    FilterComponent,
+    D3graphComponent,
+    LineChartComponent
+  ]
 })
 export class TradingPostModule { }

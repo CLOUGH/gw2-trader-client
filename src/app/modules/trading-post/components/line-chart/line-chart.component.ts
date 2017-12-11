@@ -49,8 +49,8 @@ export class LineChartComponent implements OnInit, AfterViewInit {
     if (data.length) {
       const d3 = this.d3;
       const svg = d3.select(this.svgElement.nativeElement),
-        margin = { top: 20, right: 20, bottom: 110, left: 40 },
-        minChartmargin = { top: 430, right: 20, bottom: 30, left: 40 },
+        margin = { top: 20, right: 20, bottom: 140, left: 40 },
+        minChartmargin = { top: 500, right: 20, bottom: 30, left: 40 },
         width = +svg.attr('width') - margin.left - margin.right,
         height = +svg.attr('height') - margin.top - margin.bottom,
         height2 = +svg.attr('height') - minChartmargin.top - minChartmargin.bottom;
@@ -64,7 +64,7 @@ export class LineChartComponent implements OnInit, AfterViewInit {
           buy: +d.buy
         };
       }).filter((d) => {
-        const startOfDay = moment().subtract(1, 'week').toDate();
+        const startOfDay = moment().subtract(1, 'year').toDate();
         return startOfDay <= d.timestamp;
 
       });
@@ -110,17 +110,13 @@ export class LineChartComponent implements OnInit, AfterViewInit {
         .x(function (d) { return x(d.timestamp); })
         .y(function (d) { return y(d.sell); });
 
-      const miniSellLine = d3.line<ChartData>()
+      const miniSellArea = d3.area<ChartData>()
         .x(function (d) { return x2(d.timestamp); })
         .y(function (d) { return y2(d.sell); });
 
       const buyLine = d3.line<ChartData>()
         .x(function (d) { return x(d.timestamp); })
         .y(function (d) { return y(d.buy); });
-
-      const miniBuyLine = d3.line<ChartData>()
-        .x(function (d) { return x2(d.timestamp); })
-        .y(function (d) { return y2(d.buy); });
 
       svg.append('defs').append('clipPath')
         .attr('id', 'clip')
@@ -176,22 +172,12 @@ export class LineChartComponent implements OnInit, AfterViewInit {
       context.append('path')
         .datum(parsedData)
         .attr('class', 'sellLine')
-        .attr('fill', 'none')
+        .attr('fill', 'steelblue')
         .attr('stroke', 'steelblue')
         .attr('stroke-linejoin', 'round')
         .attr('stroke-linecap', 'round')
         .attr('stroke-width', 1.5)
-        .attr('d', miniSellLine);
-
-      context.append('path')
-        .datum(parsedData)
-        .attr('class', 'buyLine')
-        .attr('fill', 'none')
-        .attr('stroke', 'red')
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1.5)
-        .attr('d', miniBuyLine);
+        .attr('d', miniSellArea);
 
 
       context.append('g')
