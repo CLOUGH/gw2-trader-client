@@ -12,3 +12,29 @@ $rare: #fcd00b;
 $exotic: #ffa405;
 $ascended: #fb3e8d;
 $legendary: #4C139D;
+// .area {
+//   // fill: steelblue;
+//   clip-path: url(#clip);
+// }
+.zoom {
+  cursor: move;
+  fill: none;
+  pointer-events: all;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.dot {
+  fill: white;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
