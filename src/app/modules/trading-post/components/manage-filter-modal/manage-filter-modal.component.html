@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title">Manage Item Filters</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table class="table table-sm table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let itemFilter of itemFilters">
+        <td>{{ itemFilter.name }}</td>
+        <td>{{ itemFilter.description }}</td>
+        <td></td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="deleteItemFilter(itemFilter)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="!itemFilters.length">
+        <td colspan="4" class="text-center">There are no filters here to manage</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="ok()">Ok</button>
+</div>

@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title">Save Filter</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form novalidate [formGroup]="itemFilterForm" (ngSubmit)="ok">
+    <div class="form-group">
+      <label for="" class="form-control-label">Name</label>
+      <input type="name" name="name" formControlName="name" class="form-control" placeholder="Item filter name">
+    </div>
+    <div class="form-group">
+      <label for="">Description</label>
+      <textarea name="description" formControlName="description" class="form-control" cols="30" rows="10" placeholder="Descibe the purpose of the filter"></textarea>
+    </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary" (click)="ok()">Ok</button>
+  <button type="button" class="btn btn-outline-danger" (click)="activeModal.dismiss()">Cancel</button>
+</div>

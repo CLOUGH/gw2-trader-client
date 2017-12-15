@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
+import { ItemFilter } from '../../../../shared/models/item-filter';
+import { NgModel } from '@angular/forms';
+import { SaveFilterModalComponent } from '../save-filter-modal/save-filter-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -29,41 +33,24 @@ export class FilterComponent implements OnInit {
     '', 'Junk', 'Basic', 'Fine', 'Masterwork', 'Rare', 'Exotic', 'Ascended', 'Legendary'
   ];
 
-  @Input() public filter;
   @Output() filterChange = new EventEmitter<any>();
+  @Output() filterSaved = new EventEmitter<ItemFilter>();
   public advanceFilterCollapsed = true;
-
+  public currentFilter: any;
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.filterForm = this.formBuilder.group({
-      type: '',
-      name: '',
-      rarity: '',
-      maxLevel: ['', [Validators.max(80), Validators.min(0)]],
-      minLevel: ['', [Validators.max(80), Validators.min(0)]],
-      minBuy: ['', Validators.min(0)],
-      maxBuy: ['', Validators.min(0)],
-      minSell: ['', Validators.min(0)],
-      maxSell: ['', Validators.min(0)],
-      minSupply: ['', Validators.min(0)],
-      maxSupply: ['', Validators.min(0)],
-      minDemand: ['', Validators.min(0)],
-      maxDemand: ['', Validators.min(0)],
-      minProfit: [''],
-      maxProfit: [''],
-      minROI: ['', Validators.min(0)],
-      maxROI: ['', Validators.min(0)],
-      minSUC: ['', Validators.min(0)],
-      maxSUC: ['', Validators.min(0)],
-      minBUC: ['', Validators.min(0)],
-      maxBUC: ['', Validators.min(0)],
-    });
 
-    this.filterForm.patchValue(this.filter);
+  }
 
+  @Input()
+  set filter(filter) {
+    this.filterForm = this.createFilterForm();
+    this.filterForm.patchValue(filter);
+    this.currentFilter = filter;
     this.subscribeToFormChange();
+
   }
 
   subscribeToFormChange() {
@@ -85,6 +72,42 @@ export class FilterComponent implements OnInit {
     }
 
     return filteredValues;
+  }
+
+  createFilterForm() {
+    return this.formBuilder.group({
+      type: '',
+      name: '',
+      rarity: '',
+      maxLevel: ['', [Validators.max(80), Validators.min(0)]],
+      minLevel: ['', [Validators.max(80), Validators.min(0)]],
+      minBuy: ['', Validators.min(0)],
+      maxBuy: ['', Validators.min(0)],
+      minSell: ['', Validators.min(0)],
+      maxSell: ['', Validators.min(0)],
+      minSupply: ['', Validators.min(0)],
+      maxSupply: ['', Validators.min(0)],
+      minDemand: ['', Validators.min(0)],
+      maxDemand: ['', Validators.min(0)],
+      minProfit: ['', Validators.min(0)],
+      maxProfit: ['', Validators.min(0)],
+      minROI: ['', Validators.min(0)],
+      maxROI: ['', Validators.min(0)],
+      minSUC: ['', Validators.min(0)],
+      maxSUC: ['', Validators.min(0)],
+      minBUC: ['', Validators.min(0)],
+      maxBUC: ['', Validators.min(0)],
+      limit: [20, Validators.min(0)]
+    });
+  }
+
+  resetForm() {
+    this.filterForm.reset();
+  }
+
+  updateActiveFilter(filter) {
+    console.log(filter);
+    this.filterForm.patchValue(filter);
   }
 
 }

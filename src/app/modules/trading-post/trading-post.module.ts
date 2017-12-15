@@ -16,6 +16,10 @@ import { FilterComponent } from './components/filter/filter.component';
 import { ItemResolverService } from './item-resolver.service';
 import { D3graphComponent } from '../../shared/components/d3graph/d3graph.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { SaveFilterModalComponent } from './components/save-filter-modal/save-filter-modal.component';
+import { ItemFilterService } from '../../shared/services/item-filter.service';
+import { CustomFilterDropdownComponent } from './components/custom-filter-dropdown/custom-filter-dropdown.component';
+import { ManageFilterModalComponent } from './components/manage-filter-modal/manage-filter-modal.component';
 
 @NgModule({
   imports: [
@@ -27,7 +31,7 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [ItemService, ItemResolverService, D3Service],
+  providers: [ItemService, ItemResolverService, D3Service, ItemFilterService],
   declarations: [
     ItemComponent,
     ItemDetailComponent,
@@ -35,7 +39,11 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     CoinComponent,
     FilterComponent,
     D3graphComponent,
-    LineChartComponent
-  ]
+    LineChartComponent,
+    SaveFilterModalComponent,
+    CustomFilterDropdownComponent,
+    ManageFilterModalComponent
+  ],
+  entryComponents: [SaveFilterModalComponent, ManageFilterModalComponent]
 })
 export class TradingPostModule { }

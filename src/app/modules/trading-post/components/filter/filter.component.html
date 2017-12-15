@@ -3,10 +3,17 @@
     <label for="name" class="col-form-label col-form-label-sm">Name</label>
     <input class="form-control form-control-sm" formControlName="name" placeholder="Item name">
   </div>
-  <div class="text-right">
-    <button class="btn btn-link" (click)="advanceFilterCollapsed = !advanceFilterCollapsed" [attr.aria-expanded]="!advanceFilterCollapsed"
-      aria-controls="collapseExample">Advance</button>
+  <div class="row">
+    <div class="col">
+      <app-custom-filter-dropdown [filter]="currentFilter" (filterChange)="updateActiveFilter($event)" (clearFilter)="resetForm()"></app-custom-filter-dropdown>
+
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-link" (click)="advanceFilterCollapsed = !advanceFilterCollapsed" [attr.aria-expanded]="!advanceFilterCollapsed"
+        aria-controls="collapseExample">Advance</button>
+    </div>
   </div>
+
   <div id="collapseExample" [ngbCollapse]="advanceFilterCollapsed">
     <div class="row">
       <div class="col-md-3">
@@ -139,7 +146,6 @@
       </div>
 
       <div class="col-md-3">
-
         <!-- BUC -->
         <div class="row">
           <div class="col-6">
@@ -173,9 +179,6 @@
         </div>
 
       </div>
-    </div>
-    <div class="text-right">
-      <button class=" btn btn-primary btn-sm">Save Filter</button>
     </div>
   </div>
 </form>

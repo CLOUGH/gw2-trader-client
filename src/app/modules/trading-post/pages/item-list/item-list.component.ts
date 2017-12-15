@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../../../../shared/models/item';
-import { ItemService } from '../../../../shared/services/item/item.service';
 import { ToasterService } from 'angular2-toaster';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { ItemService } from '../../../../shared/services/item/item.service';
+import { Item } from '../../../../shared/models/item';
+import { SaveFilterModalComponent } from '../../components/save-filter-modal/save-filter-modal.component';
+import { ItemFilter } from '../../../../shared/models/item-filter';
+import { ItemFilterService } from '../../../../shared/services/item-filter.service';
 
 @Component({
   selector: 'app-item-list',
@@ -15,8 +20,14 @@ export class ItemListComponent implements OnInit {
   private itemsPerPage = 50;
   public filter: any;
   public itemUpdate;
+  public itemFilters: Array<ItemFilter>;
 
-  constructor(private itemService: ItemService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(
+    private itemService: ItemService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private modalService: NgbModal
+  ) {
     this.itemUpdate = {
       updated: 0,
       totalItems: 0
@@ -45,6 +56,8 @@ export class ItemListComponent implements OnInit {
     });
     this.filter = Object.assign(this.filter, this.activatedRoute.snapshot.queryParams);
     this.getItems();
+
+
   }
 
   syncItemPrices() {

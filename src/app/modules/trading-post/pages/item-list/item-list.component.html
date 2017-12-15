@@ -13,6 +13,21 @@
 
   <div class="mb-3">
     <app-filter [filter]="filter" (filterChange)="onFilterUpdated($event)"></app-filter>
+    <ul class="list-group mb-3">
+      <li class="list-group-item" *ngFor="let itemFilter of itemFilters">
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-link" (click)="setAsActiveFilter(itemFilter)">
+              {{ itemFilter.name }}</button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-sm btn-danger pull-right" (click)="deleteFilterItem(itemFilter)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <table class="table table-hover table-striped table-hover table-sm table-responsive-lg">
