@@ -1,7 +1,8 @@
 <div ngbDropdown class="d-inline-block">
   <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle>
     <i class="fa fa-filter"></i>
-    Custom Filters
+    <span *ngIf="!selectedFilter">Custom Filters</span>
+    <span *ngIf="selectedFilter">{{ selectedFilter.name }}</span>
   </button>
   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
     <button class="dropdown-item btn-sm" (click)="removeAllFilters()">Clear Filter</button>

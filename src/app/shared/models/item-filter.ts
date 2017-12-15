@@ -1,4 +1,5 @@
 export interface ItemFilter {
+  _id?: number;
   type?: string;
   name?: string;
   rarity?: string;

@@ -80,7 +80,8 @@ export class ItemListComponent implements OnInit {
 
   onFilterUpdated(event) {
     this.filter = event;
-    this.router.navigate(['/trading-post'], { relativeTo: this.activatedRoute, queryParams: this.filter });
+    const queryParams = Object.assign(this.filter, this.activatedRoute.snapshot.queryParams);
+    this.router.navigate(['/trading-post'], { relativeTo: this.activatedRoute, queryParams: queryParams });
     this.getItems();
   }
 }

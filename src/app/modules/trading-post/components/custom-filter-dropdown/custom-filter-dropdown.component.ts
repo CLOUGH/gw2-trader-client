@@ -4,6 +4,7 @@ import { ItemFilterService } from '../../../../shared/services/item-filter.servi
 import { SaveFilterModalComponent } from '../save-filter-modal/save-filter-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManageFilterModalComponent } from '../manage-filter-modal/manage-filter-modal.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-custom-filter-dropdown',
@@ -12,8 +13,13 @@ import { ManageFilterModalComponent } from '../manage-filter-modal/manage-filter
 })
 export class CustomFilterDropdownComponent implements OnInit {
   public itemFilters: Array<ItemFilter>;
-  constructor(private itemFilterService: ItemFilterService, private modalService: NgbModal) { }
+  constructor(private itemFilterService: ItemFilterService,
+    private modalService: NgbModal,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
   private _filter;
+  public selectedFilter: ItemFilter;
 
   @Output() filterChange = new EventEmitter<any>();
   @Output() clearFilter = new EventEmitter<any>();
@@ -21,12 +27,17 @@ export class CustomFilterDropdownComponent implements OnInit {
   @Input()
   set filter(filter) {
     this._filter = filter;
+
   }
 
   ngOnInit() {
     this.itemFilters = [];
     this.itemFilterService.getItemFilters().subscribe(data => {
       this.itemFilters = data;
+      const filterId = this.activatedRoute.snapshot.queryParams.filterId;
+      if (filterId) {
+        this.selectedFilter = this.itemFilters.find(item => filterId === item._id);
+      }
     });
   }
   saveFilter() {
@@ -45,10 +56,17 @@ export class CustomFilterDropdownComponent implements OnInit {
   }
 
   setAsActiveFilter(itemFilter) {
+    this.selectedFilter = itemFilter;
     this.filterChange.emit(itemFilter.filters);
+
+    const queryParams = Object.assign({ filterId: itemFilter._id }, this.activatedRoute.snapshot.queryParams);
+
+    this.router.navigate(['/trading-post'], { relativeTo: this.activatedRoute, queryParams: queryParams });
+
   }
 
   removeAllFilters() {
+    this.selectedFilter = null;
     this.clearFilter.emit();
   }
 
