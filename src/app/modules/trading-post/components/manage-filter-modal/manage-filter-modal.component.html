@@ -9,17 +9,19 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Description</th>
-        <th>Created</th>
-        <th>Actions</th>
+        <th class="description-column">Description</th>
+        <th class="text-center">Created</th>
+        <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let itemFilter of itemFilters">
         <td>{{ itemFilter.name }}</td>
         <td>{{ itemFilter.description }}</td>
-        <td></td>
-        <td>
+        <td class="text-center">
+          {{ itemFilter.createdAt | date }}
+        </td>
+        <td class="text-center">
           <button class="btn btn-sm btn-danger" (click)="deleteItemFilter(itemFilter)">
             <i class="fa fa-trash"></i>
           </button>

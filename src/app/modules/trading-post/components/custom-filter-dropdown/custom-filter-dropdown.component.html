@@ -1,21 +1,21 @@
 <div ngbDropdown class="d-inline-block">
-  <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle>
+  <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle type="button">
     <i class="fa fa-filter"></i>
     <span *ngIf="!selectedFilter">Custom Filters</span>
     <span *ngIf="selectedFilter">{{ selectedFilter.name }}</span>
   </button>
   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-    <button class="dropdown-item btn-sm" (click)="removeAllFilters()">Clear Filter</button>
+    <button class="dropdown-item btn-sm" (click)="removeAllFilters()" type="button">Clear Filter</button>
     <div class="dropdown-divider"></div>
-    <button class="dropdown-item btn-sm" *ngFor="let itemFilter of itemFilters" (click)="setAsActiveFilter(itemFilter)">{{ itemFilter.name }}</button>
+    <button class="dropdown-item btn-sm" *ngFor="let itemFilter of itemFilters" (click)="setAsActiveFilter(itemFilter)" type="button">{{ itemFilter.name }}</button>
     <p *ngIf="!itemFilters.length" class="text-center">
       <small>No custom filters</small>
     </p>
     <div class="dropdown-divider"></div>
-    <button class="dropdown-item btn-sm" (click)="saveFilter()">
+    <button class="dropdown-item btn-sm" (click)="saveFilter()" type="button">
       Save Filter
     </button>
-    <button class="dropdown-item btn-sm" (click)="manageFilters()">
+    <button class="dropdown-item btn-sm" (click)="manageFilters()" type="button">
       Manage Filters
     </button>
 

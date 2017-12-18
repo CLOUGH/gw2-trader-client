@@ -5,6 +5,7 @@ import { SaveFilterModalComponent } from '../save-filter-modal/save-filter-modal
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManageFilterModalComponent } from '../manage-filter-modal/manage-filter-modal.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { timeout } from 'd3';
 
 @Component({
   selector: 'app-custom-filter-dropdown',
@@ -57,17 +58,19 @@ export class CustomFilterDropdownComponent implements OnInit {
 
   setAsActiveFilter(itemFilter) {
     this.selectedFilter = itemFilter;
-    this.filterChange.emit(itemFilter.filters);
+    const queryParams = Object.assign({}, { filterId: itemFilter._id }, itemFilter.filters);
 
-    const queryParams = Object.assign({ filterId: itemFilter._id }, this.activatedRoute.snapshot.queryParams);
-
-    this.router.navigate(['/trading-post'], { relativeTo: this.activatedRoute, queryParams: queryParams });
+    this.router.navigate(['/trading-post'], { replaceUrl: true, queryParams: queryParams }).then((data) => {
+      this.filterChange.emit(itemFilter.filters);
+    });
 
   }
 
   removeAllFilters() {
     this.selectedFilter = null;
-    this.clearFilter.emit();
+    this.router.navigate(['/trading-post'], { relativeTo: this.activatedRoute, queryParams: {} }).then(() => {
+      this.clearFilter.emit();
+    });
   }
 
   manageFilters() {

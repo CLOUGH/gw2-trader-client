@@ -32,9 +32,6 @@ export class ItemListComponent implements OnInit {
       updated: 0,
       totalItems: 0
     };
-    this.filter = {
-      limit: this.itemsPerPage
-    };
   }
 
   ngOnInit() {
@@ -54,10 +51,8 @@ export class ItemListComponent implements OnInit {
         this.getItems();
       }
     });
-    this.filter = Object.assign(this.filter, this.activatedRoute.snapshot.queryParams);
+    this.filter = Object.assign({}, this.activatedRoute.snapshot.queryParams);
     this.getItems();
-
-
   }
 
   syncItemPrices() {
@@ -72,7 +67,6 @@ export class ItemListComponent implements OnInit {
   }
 
   getItems() {
-    this.filter.limit = this.itemsPerPage;
     this.itemService.getItems(this.filter).subscribe(items => {
       this.items = items;
     });
@@ -80,8 +74,6 @@ export class ItemListComponent implements OnInit {
 
   onFilterUpdated(event) {
     this.filter = event;
-    const queryParams = Object.assign(this.filter, this.activatedRoute.snapshot.queryParams);
-    this.router.navigate(['/trading-post'], { relativeTo: this.activatedRoute, queryParams: queryParams });
     this.getItems();
   }
 }

@@ -5,6 +5,7 @@ import { ItemFilter } from '../../../../shared/models/item-filter';
 import { NgModel } from '@angular/forms';
 import { SaveFilterModalComponent } from '../save-filter-modal/save-filter-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -37,11 +38,12 @@ export class FilterComponent implements OnInit {
   @Output() filterSaved = new EventEmitter<ItemFilter>();
   public advanceFilterCollapsed = true;
   public currentFilter: any;
+  public filterFormUpdated: boolean;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
-
+    this.filterFormUpdated = false;
   }
 
   @Input()
@@ -55,7 +57,11 @@ export class FilterComponent implements OnInit {
 
   subscribeToFormChange() {
     this.filterForm.valueChanges.subscribe(filter => {
-      this.filterChange.emit(this.getFilteredValues(filter));
+      const filteredValues = this.getFilteredValues(filter);
+
+      this.router.navigate(['/trading-post'], { replaceUrl: true, queryParams: filteredValues }).then((data) => {
+        this.filterChange.emit(filteredValues);
+      });
     });
   }
   submit() {
@@ -106,8 +112,12 @@ export class FilterComponent implements OnInit {
   }
 
   updateActiveFilter(filter) {
-    console.log(filter);
-    this.filterForm.patchValue(filter);
+    const form = this.createFilterForm();
+    form.patchValue(filter);
+    this.filterForm = form;
+    this.subscribeToFormChange();
+
+    this.filterChange.emit(this.getFilteredValues(this.filterForm.value));
   }
 
 }
